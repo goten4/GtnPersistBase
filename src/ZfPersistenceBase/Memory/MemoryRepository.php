@@ -39,27 +39,25 @@ class MemoryRepository implements Repository
     {
     }
 
-    public function getBy(array $criteria)
-    {
-        throw new \Exception('Method getBy() is not implemented in \ZfPersistenceBase\Memory\MemoryRepository');
-    }
-
-    public function getAllBy(array $criteria)
-    {
-        throw new \Exception('Method getAllBy() is not implemented in \ZfPersistenceBase\Memory\MemoryRepository');
-    }
-
     public function remove(Entity $entity)
     {
         foreach ($this->_entities as $index => $current) {
             if ($current->getId() == $entity->getId()) {
                 unset($this->_entities[$index]);
-                return;
+                break;
             }
         }
     }
 
-    public function removeAll(array $entities = null)
+    public function removeAll(array $entities = NULL)
     {
+        if ($entities == NULL) {
+            unset($this->_entities);
+            $this->_entities = array();
+            return;
+        }
+        foreach ($entities as $entity) {
+            $this->remove($entity);
+        }
     }
 }
