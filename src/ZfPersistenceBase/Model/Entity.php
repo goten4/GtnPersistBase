@@ -1,5 +1,5 @@
 <?php
-namespace ZfPersistenceBase;
+namespace ZfPersistenceBase\Model;
 
 interface Entity
 {

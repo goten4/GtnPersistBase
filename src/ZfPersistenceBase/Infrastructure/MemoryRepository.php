@@ -1,8 +1,8 @@
 <?php
-namespace ZfPersistenceBase\Memory;
+namespace ZfPersistenceBase\Infrastructure;
 
-use ZfPersistenceBase\Entity;
-use ZfPersistenceBase\Repository;
+use ZfPersistenceBase\Model\Entity;
+use ZfPersistenceBase\Model\Repository;
 
 class MemoryRepository implements Repository
 {

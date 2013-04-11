@@ -1,5 +1,5 @@
 <?php
-namespace ZfPersistenceBase\Memory;
+namespace ZfPersistenceBase\Infrastructure;
 
 use Zend\ServiceManager\FactoryInterface;
 

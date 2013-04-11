@@ -4,7 +4,7 @@
 ## Introduction
 
 **ZfPersistenceBase** is a Zend Framework 2 module providing the basics for persistence
-trying to follow DDD principles (http://domaindrivendesign.org/books/#DDD).
+trying to follow [DDD principles](http://domaindrivendesign.org/books/#DDD).
 
 ## Requirements
 
@@ -18,6 +18,12 @@ Simply clone this project into your `./vendor/` directory and enable it in your
 Provided Classes and Interfaces
 -------------------------------
 
-* `ZfPersistenceBase\Entity` - Interface defining an entity (getId() and setId() methods).
-* `ZfPersistenceBase\Repository` - Interface defining the minimum set of methods a repository must implements.
-* `ZfPersistenceBase\Memory\MemoryRepository` - In memory Repository implementation (useful in unit tests context).
+* `ZfPersistenceBase\Model\Entity` - Interface defining an entity (getId() and setId() methods).
+* `ZfPersistenceBase\Model\Repository` - Interface defining the minimum set of methods a repository must implements.
+* `ZfPersistenceBase\Infrastructure\MemoryRepository` - In memory Repository implementation (useful in unit tests context).
+* `ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory` - Factory for creating MemoryRepository
+
+## See also
+
+* [ZfPersistenceZendDb](https://github.com/goten4/ZfPersistenceZendDb)
+* [ZfPersistenceDoctrineORM](https://github.com/goten4/ZfPersistenceDoctrineORM)

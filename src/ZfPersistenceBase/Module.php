@@ -1,10 +1,8 @@
 <?php
 namespace ZfPersistenceBase;
 
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\Loader\AutoloaderFactory;
 use Zend\Loader\StandardAutoloader;
 
@@ -29,7 +27,7 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface
     {
         return array(
             'factories' => array(
-                'zfpersistence.repository' => 'ZfPersistenceBase\Memory\RepositoryFactory'
+                'zfpersistence.repository' => 'ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory'
             )
         );
     }

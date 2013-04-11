@@ -1,11 +1,10 @@
 <?php
-namespace ZfPersistenceBaseTest;
+namespace ZfPersistenceBaseTest\Infrastructure;
 
-use ZfPersistenceBase\Entity;
+use ZfPersistenceBaseTest\Model\User;
 
 abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-
     protected abstract function _createRepository();
 
     protected function setUp()
@@ -27,7 +26,7 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $storedEntity = $this->repository->getById(1);
         
-        $this->assertInstanceOf('ZfPersistenceBaseTest\User', $storedEntity);
+        $this->assertInstanceOf('ZfPersistenceBaseTest\Model\User', $storedEntity);
         $this->assertEquals('John', $storedEntity->getName());
     }
 
@@ -105,33 +104,5 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
         $user->setName($name);
         $this->repository->add($user);
         return $user;
-    }
-}
-
-class User implements Entity
-{
-    private $id;
-    private $name;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
     }
 }

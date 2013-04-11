@@ -1,12 +1,10 @@
 <?php
-namespace tests\ZfPersistenceBaseTest\Memory;
+namespace ZfPersistenceBaseTest\Infrastructure;
 
-use ZfPersistenceBaseTest\AbstractRepositoryTest;
-use ZfPersistenceBase\Memory\MemoryRepository;
+use ZfPersistenceBase\Infrastructure\MemoryRepository;
 
 class MemoryRepositoryTest extends AbstractRepositoryTest
 {
-
     protected function _createRepository()
     {
         return new MemoryRepository();
