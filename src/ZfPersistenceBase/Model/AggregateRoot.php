@@ -1,8 +1,7 @@
 <?php
 namespace ZfPersistenceBase\Model;
 
-interface Entity
+interface AggregateRoot
 {
     public function getId();
-    public function setId($id);
 }

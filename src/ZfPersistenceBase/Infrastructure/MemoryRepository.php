@@ -1,63 +1,63 @@
 <?php
 namespace ZfPersistenceBase\Infrastructure;
 
-use ZfPersistenceBase\Model\Entity;
+use ZfPersistenceBase\Model\AggregateRoot;
 use ZfPersistenceBase\Model\Repository;
 
 class MemoryRepository implements Repository
 {
     private $_counter = 1;
-    private $_entities = array();
+    private $_aggregateRoots = array();
 
-    public function add(Entity $entity)
+    public function add(AggregateRoot $aggregateRoot)
     {
-        $entity->setId($this->_counter++);
-        $this->_entities[] = $entity;
+        $aggregateRoot->setId($this->_counter++);
+        $this->_aggregateRoots[] = $aggregateRoot;
     }
 
     public function getAll()
     {
-        return $this->_entities;
+        return $this->_aggregateRoots;
     }
 
     public function size()
     {
-        return count($this->_entities);
+        return count($this->_aggregateRoots);
     }
 
     public function getById($id)
     {
-        foreach ($this->_entities as $entity) {
-            if ($entity->getId() == $id) {
-                return $entity;
+        foreach ($this->_aggregateRoots as $aggregateRoot) {
+            if ($aggregateRoot->getId() == $id) {
+                return $aggregateRoot;
             }
         }
         return NULL;
     }
 
-    public function update(Entity $entity)
+    public function update(AggregateRoot $aggregateRoot)
     {
     }
 
-    public function remove(Entity $entity)
+    public function remove(AggregateRoot $aggregateRoot)
     {
-        foreach ($this->_entities as $index => $current) {
-            if ($current->getId() == $entity->getId()) {
-                unset($this->_entities[$index]);
+        foreach ($this->_aggregateRoots as $index => $current) {
+            if ($current->getId() == $aggregateRoot->getId()) {
+                unset($this->_aggregateRoots[$index]);
                 break;
             }
         }
     }
 
-    public function removeAll(array $entities = NULL)
+    public function removeAll(array $aggregateRoots = NULL)
     {
-        if ($entities == NULL) {
-            unset($this->_entities);
-            $this->_entities = array();
+        if ($aggregateRoots == NULL) {
+            unset($this->_aggregateRoots);
+            $this->_aggregateRoots = array();
             return;
         }
-        foreach ($entities as $entity) {
-            $this->remove($entity);
+        foreach ($aggregateRoots as $aggregateRoot) {
+            $this->remove($aggregateRoot);
         }
     }
 }

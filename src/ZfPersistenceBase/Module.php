@@ -27,7 +27,7 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface
     {
         return array(
             'factories' => array(
-                'zfpersistence.repository' => 'ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory'
+                'ZfPersistence\Repository' => 'ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory'
             )
         );
     }

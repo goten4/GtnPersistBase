@@ -18,7 +18,7 @@ Simply clone this project into your `./vendor/` directory and enable it in your
 Provided Classes and Interfaces
 -------------------------------
 
-* `ZfPersistenceBase\Model\Entity` - Interface defining an entity (getId() and setId() methods).
+* `ZfPersistenceBase\Model\AggregateRoot` - Interface defining an aggregate root (getId() method).
 * `ZfPersistenceBase\Model\Repository` - Interface defining the minimum set of methods a repository must implements.
 * `ZfPersistenceBase\Infrastructure\MemoryRepository` - In memory Repository implementation (useful in unit tests context).
 * `ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory` - Factory for creating MemoryRepository

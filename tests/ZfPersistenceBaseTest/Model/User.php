@@ -1,9 +1,9 @@
 <?php
 namespace ZfPersistenceBaseTest\Model;
 
-use ZfPersistenceBase\Model\Entity;
+use ZfPersistenceBase\Model\AggregateRoot;
 
-class User implements Entity
+class User implements AggregateRoot
 {
     private $id;
     private $name;
