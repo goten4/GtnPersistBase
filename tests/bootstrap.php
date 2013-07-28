@@ -1,5 +1,7 @@
 <?php
 
+use ZfPersistenceBaseTest\ServiceManagerFactory;
+
 ini_set('error_reporting', E_ALL);
 
 $files = array(__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../vendor/autoload.php');
@@ -15,6 +17,13 @@ if (! isset($loader)) {
 }
 
 /* @var $loader \Composer\Autoload\ClassLoader */
-$loader->add('ZfPersistenceBase\\', dirname(__DIR__) . '/src');
 $loader->add('ZfPersistenceBaseTest\\', __DIR__);
-unset($files, $file, $loader);
+
+if (file_exists(__DIR__ . '/TestConfiguration.php')) {
+    $config = require __DIR__ . '/TestConfiguration.php';
+} else {
+    $config = require __DIR__ . '/TestConfiguration.php.dist';
+}
+
+ServiceManagerFactory::setConfig($config);
+unset($files, $file, $loader, $config);

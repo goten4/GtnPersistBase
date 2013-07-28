@@ -1,20 +1,21 @@
 <?php
 namespace ZfPersistenceBase;
 
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Loader\AutoloaderFactory;
 use Zend\Loader\StandardAutoloader;
 
-class Module implements AutoloaderProviderInterface, ServiceProviderInterface
-{
+define('ZFP_BASE_MODULE_BASE_DIR', dirname(dirname(__DIR__)));
 
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface
+{
     public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
-                MODULE_BASE_DIR . '/autoload_classmap.php',
-            ),
+                ZFP_BASE_MODULE_BASE_DIR . '/autoload_classmap.php'
+            ), 
             AutoloaderFactory::STANDARD_AUTOLOADER => array(
                 StandardAutoloader::LOAD_NS => array(
                     __NAMESPACE__ => __DIR__
@@ -23,12 +24,8 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface
         );
     }
 
-    public function getServiceConfig()
+    public function getConfig()
     {
-        return array(
-            'factories' => array(
-                'ZfPersistence\Repository' => 'ZfPersistenceBase\Infrastructure\MemoryRepositoryFactory'
-            )
-        );
+        return include ZFP_BASE_MODULE_BASE_DIR . '/config/module.config.php';
     }
 }

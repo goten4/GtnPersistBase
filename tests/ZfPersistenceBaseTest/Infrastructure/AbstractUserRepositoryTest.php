@@ -1,33 +1,38 @@
 <?php
 namespace ZfPersistenceBaseTest\Infrastructure;
 
+use ZfPersistenceBaseTest\ServiceManagerFactory;
 use ZfPersistenceBaseTest\Model\User;
 
-abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractUserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected abstract function _createRepository();
+    protected static $serviceManager;
+    
+    public static function setUpBeforeClass()
+    {
+        static::$serviceManager = ServiceManagerFactory::getServiceManager();
+    }
 
     protected function setUp()
     {
-        $this->repository = $this->_createRepository();
-        $this->_populate();
+        $this->repository = static::$serviceManager->get('ZfPersistence\UserRepository');
+        $this->populate();
     }
 
     /** @test */
     public function canAdd()
     {
-        $this->repository->add(new User());
+        $this->repository->add(new User('Bill'));
         
         $this->assertEquals(4, $this->repository->size());
     }
-    
+
     /** @test */
     public function cannotGetByUnknownId()
     {
         $this->assertNull($this->repository->getById(99));
     }
-    
+
     /** @test */
     public function canGetById()
     {
@@ -44,6 +49,7 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
         
         $this->assertInternalType('array', $aggregateRoots);
         $this->assertEquals(3, count($aggregateRoots));
+        $this->assertInstanceOf('ZfPersistenceBaseTest\Model\User', $aggregateRoots[0]);
     }
 
     /** @test */
@@ -55,19 +61,17 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function canUpdate()
     {
-        $aggregateRoot = $this->repository->getById(1);
-        $aggregateRoot->setName('Jack');
+        $aggregateRoot = $this->getAggregateRootById(1)->setName('Jack');
         
         $this->repository->update($aggregateRoot);
         
-        $storedAggregateRoot = $this->repository->getById(1);
-        $this->assertEquals('Jack', $storedAggregateRoot->getName());
+        $this->assertEquals('Jack', $this->getAggregateRootById(1)->getName());
     }
 
     /** @test */
     public function canRemove()
     {
-        $aggregateRoot = $this->repository->getById(1);
+        $aggregateRoot = $this->getAggregateRootById(1);
         
         $this->repository->remove($aggregateRoot);
         
@@ -78,11 +82,10 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function canRemoveAllSpecifiedAggregateRoots()
     {
-        $aggregateRoot1 = $this->repository->getById(1);
-        $aggregateRoot2 = $this->repository->getById(2);
+        $aggregateRoot1 = $this->getAggregateRootById(1);
+        $aggregateRoot2 = $this->getAggregateRootById(2);
         $this->repository->removeAll(array(
-            $aggregateRoot1, 
-            $aggregateRoot2
+            $aggregateRoot1, $aggregateRoot2
         ));
         
         $this->assertEquals(1, $this->repository->size());
@@ -98,17 +101,25 @@ abstract class AbstractRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->repository->size());
     }
 
-    private function _populate()
+    protected function populate()
     {
-        $this->_addUser('John');
-        $this->_addUser('Jane');
-        $this->_addUser('Mike');
+        $this->addUser('John');
+        $this->addUser('Jane');
+        $this->addUser('Mike');
     }
 
-    private function _addUser($name)
+    private function getAggregateRootById($id)
     {
-        $user = new User();
-        $user->setName($name);
+        $aggregateRoot = $this->repository->getById($id);
+        if ($aggregateRoot == null) {
+            $this->fail('Method getById() failed');
+        }
+        return $aggregateRoot;
+    }
+
+    private function addUser($name)
+    {
+        $user = new User($name);
         $this->repository->add($user);
         return $user;
     }

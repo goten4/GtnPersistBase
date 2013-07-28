@@ -8,6 +8,11 @@ class User implements AggregateRoot
     private $id;
     private $name;
 
+    public function __construct($name = null)
+    {
+        $this->setName($name);
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -28,5 +33,19 @@ class User implements AggregateRoot
     {
         $this->name = $name;
         return $this;
+    }
+    
+    public function getArrayCopy()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+        );
+    }
+    
+    public function exchangeArray(array $data)
+    {
+        $this->setId($data['id']);
+        $this->setName($data['name']);
     }
 }
