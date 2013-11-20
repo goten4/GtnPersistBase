@@ -2,7 +2,7 @@
 namespace ZfPersistenceBaseTest;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\Mvc\Service\ServiceManagerConfig as MvcServiceManagerConfig;
 
 /**
  * Utility used to retrieve a freshly bootstrapped application's service manager
@@ -31,20 +31,13 @@ class ServiceManagerFactory
      *
      * @return \Zend\ServiceManager\ServiceManager
      */
-    public static function getServiceManager()
+    public static function getServiceManager($config = null)
     {
-        $serviceManager = new ServiceManager(
-            new ServiceManagerConfig(
-                isset(static::$config['service_manager']) ? static::$config['service_manager'] : array()
-            )
-        );
-        $serviceManager->setService('ApplicationConfig', static::$config);
-        $serviceManager->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
-
-        /** @var $moduleManager \Zend\ModuleManager\ModuleManager */
-        $moduleManager = $serviceManager->get('ModuleManager');
-        $moduleManager->loadModules();
-//         $serviceManager->setAllowOverride(true);
+        $config = $config ?: static::$config;
+        $smConfig = isset($config['service_manager']) ? $config['service_manager'] : array();
+        $serviceManager = new ServiceManager(new MvcServiceManagerConfig($smConfig));
+        $serviceManager->setService('ApplicationConfig', $config);
+        $serviceManager->get('ModuleManager')->loadModules();
         return $serviceManager;
     }
 }
