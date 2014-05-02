@@ -1,15 +1,20 @@
 <?php
-namespace ZfPersistenceBaseTest\Infrastructure;
+namespace GtnPersistBaseTest\Infrastructure;
 
-use ZfPersistenceBaseTest\ServiceManagerFactory;
-use ZfPersistenceBaseTest\Model\User;
+use GtnPersistBase\Infrastructure\MemoryRepository;
+use GtnPersistBase\Model\Repository;
+use GtnPersistBaseTest\Model\User;
 
 class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Repository
+     */
+    protected $repository;
+
     protected function setUp()
     {
-        $serviceManager = ServiceManagerFactory::getServiceManager();
-        $this->repository = $serviceManager->get('ZfPersistence\UserRepository');
+        $this->repository = new MemoryRepository();
         $this->populate();
     }
 
@@ -17,7 +22,7 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canAdd()
     {
         $this->repository->add(new User('Bill'));
-        
+
         $this->assertEquals(4, $this->repository->size());
     }
 
@@ -31,8 +36,8 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canGetById()
     {
         $storedAggregateRoot = $this->repository->getById(1);
-        
-        $this->assertInstanceOf('ZfPersistenceBaseTest\Model\User', $storedAggregateRoot);
+
+        $this->assertInstanceOf('GtnPersistBaseTest\Model\User', $storedAggregateRoot);
         $this->assertEquals('John', $storedAggregateRoot->getName());
     }
 
@@ -40,10 +45,10 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canGetAll()
     {
         $aggregateRoots = $this->repository->getAll();
-        
+
         $this->assertInternalType('array', $aggregateRoots);
         $this->assertEquals(3, count($aggregateRoots));
-        $this->assertInstanceOf('ZfPersistenceBaseTest\Model\User', $aggregateRoots[0]);
+        $this->assertInstanceOf('GtnPersistBaseTest\Model\User', $aggregateRoots[0]);
     }
 
     /** @test */
@@ -56,9 +61,9 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canUpdate()
     {
         $aggregateRoot = $this->repository->getById(1)->setName('Jack');
-        
+
         $this->repository->update($aggregateRoot);
-        
+
         $this->assertEquals('Jack', $this->repository->getById(1)->getName());
     }
 
@@ -66,9 +71,9 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canRemove()
     {
         $aggregateRoot = $this->repository->getById(1);
-        
+
         $this->repository->remove($aggregateRoot);
-        
+
         $this->assertEquals(2, $this->repository->size());
         $this->assertNull($this->repository->getById(1));
     }
@@ -81,7 +86,7 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->repository->removeAll(array(
             $aggregateRoot1, $aggregateRoot2
         ));
-        
+
         $this->assertEquals(1, $this->repository->size());
         $this->assertNull($this->repository->getById(1));
         $this->assertNull($this->repository->getById(2));
@@ -91,7 +96,7 @@ class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
     public function canRemoveAllAggregateRoots()
     {
         $this->repository->removeAll();
-        
+
         $this->assertEquals(0, $this->repository->size());
     }
 

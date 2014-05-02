@@ -1,5 +1,5 @@
 {
-    "name": "goten4/zf-persistence-base",
+    "name": "goten4/gtn-persist-base",
     "description": "Zend Framework 2 Module that provides Persistence basic functionality (trying to follow DDD principles)",
     "type": "library",
     "keywords": [
@@ -15,18 +15,18 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-config": "2.*",
-        "zendframework/zend-stdlib": "2.*",
-        "zendframework/zend-servicemanager": "2.*"
+        "zendframework/zend-loader": "2.3.*",
+        "zendframework/zend-modulemanager": "2.3.*",
+        "zendframework/zend-servicemanager": "2.3.*"
     },
     "require-dev": {
-        "phpunit/phpunit": ">=3.7"
+        "phpunit/PHPUnit": "3.7.*",
+        "satooshi/php-coveralls": "dev-master"
     },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "ZfPersistenceBase\\": "src/",
-            "ZfPersistenceBaseTest\\": "tests/"
+            "GtnPersistBase\\": "src/",
+            "GtnPersistBaseTest\\": "tests/"
         }
     }
 }

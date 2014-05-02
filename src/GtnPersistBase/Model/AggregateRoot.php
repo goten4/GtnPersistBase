@@ -1,5 +1,5 @@
 <?php
-namespace ZfPersistenceBase\Model;
+namespace GtnPersistBase\Model;
 
 interface AggregateRoot
 {

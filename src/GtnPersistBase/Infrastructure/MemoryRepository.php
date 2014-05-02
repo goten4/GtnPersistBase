@@ -1,8 +1,8 @@
 <?php
-namespace ZfPersistenceBase\Infrastructure;
+namespace GtnPersistBase\Infrastructure;
 
-use ZfPersistenceBase\Model\AggregateRoot;
-use ZfPersistenceBase\Model\Repository;
+use GtnPersistBase\Model\AggregateRoot;
+use GtnPersistBase\Model\Repository;
 
 class MemoryRepository implements Repository
 {
