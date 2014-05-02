@@ -1,16 +1,20 @@
 {
     "name": "goten4/gtn-persist-base",
-    "description": "Zend Framework 2 Module that provides Persistence basic functionality (trying to follow DDD principles)",
     "type": "library",
+    "description": "Zend Framework 2 Module that provides Persistence basic functionality (trying to follow DDD principles)",
     "keywords": [
         "ddd",
         "module",
         "zf2"
     ],
+    "homepage": "http://github.com/goten4/GtnPersistBase",
+    "license": "MIT",
     "authors": [
         {
             "name": "Emmanuel Bouton",
-            "email": "goten4@gmail.com"
+            "email": "goten4@gmail.com",
+            "homepage": "http://github.com/goten4",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -25,8 +29,8 @@
     },
     "autoload": {
         "psr-0": {
-            "GtnPersistBase\\": "src/",
-            "GtnPersistBaseTest\\": "tests/"
+            "GtnPersistBase\\": "src",
+            "GtnPersistBaseTest\\": "tests"
         }
     }
 }
