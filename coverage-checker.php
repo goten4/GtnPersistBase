@@ -33,10 +33,10 @@ if (!$percentage) {
     throw new InvalidArgumentException('An integer checked percentage must be given as second parameter');
 }
 
-$inputFile = "./test/clover.xml";
+$inputFile = $argc > 2 ? $argv[2] : "./test/clover.xml";
 
 if (!file_exists($inputFile)) {
-    throw new InvalidArgumentException('Invalid input file provided');
+    throw new InvalidArgumentException("$inputFile: Invalid input file provided");
 }
 
 $xml = new SimpleXMLElement(file_get_contents($inputFile));
