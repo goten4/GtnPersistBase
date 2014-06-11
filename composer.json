@@ -20,8 +20,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-loader": "2.3.*",
-        "zendframework/zend-modulemanager": "2.3.*",
-        "zendframework/zend-servicemanager": "2.3.*"
+        "zendframework/zend-modulemanager": "2.3.*"
     },
     "require-dev": {
         "phpunit/PHPUnit": "3.7.*",
@@ -29,8 +28,8 @@
     },
     "autoload": {
         "psr-0": {
-            "GtnPersistBase\\": "src",
-            "GtnPersistBaseTest\\": "tests"
+            "GtnPersistBase": "src/",
+            "GtnPersistBaseTest": "tests/"
         }
     }
 }
