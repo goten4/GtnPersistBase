@@ -1,30 +1,52 @@
 <?php
-namespace GtnPersistBase\Infrastructure;
+namespace GtnPersistBase\Infrastructure\Memory;
 
-use GtnPersistBase\Model\AggregateRoot;
-use GtnPersistBase\Model\Repository;
+use GtnPersistBase\Model\AggregateRootInterface;
+use GtnPersistBase\Model\RepositoryInterface;
 
-class MemoryRepository implements Repository
+class Repository implements RepositoryInterface
 {
+    /**
+     * @var int
+     */
     private $_counter = 1;
+
+    /**
+     * @var array
+     */
     private $_aggregateRoots = array();
 
-    public function add(AggregateRoot $aggregateRoot)
+    /**
+     * @param AggregateRootInterface $aggregateRoot
+     * @return RepositoryInterface
+     */
+    public function add(AggregateRootInterface $aggregateRoot)
     {
         $aggregateRoot->setId($this->_counter++);
         $this->_aggregateRoots[] = $aggregateRoot;
+        return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getAll()
     {
         return $this->_aggregateRoots;
     }
 
+    /**
+     * @return int
+     */
     public function size()
     {
         return count($this->_aggregateRoots);
     }
 
+    /**
+     * @param $id
+     * @return AggregateRootInterface
+     */
     public function getById($id)
     {
         foreach ($this->_aggregateRoots as $aggregateRoot) {
@@ -32,14 +54,23 @@ class MemoryRepository implements Repository
                 return $aggregateRoot;
             }
         }
-        return NULL;
+        return null;
     }
 
-    public function update(AggregateRoot $aggregateRoot)
+    /**
+     * @param AggregateRootInterface $aggregateRoot
+     * @return RepositoryInterface
+     */
+    public function update(AggregateRootInterface $aggregateRoot)
     {
+        return $this;
     }
 
-    public function remove(AggregateRoot $aggregateRoot)
+    /**
+     * @param AggregateRootInterface $aggregateRoot
+     * @return RepositoryInterface
+     */
+    public function remove(AggregateRootInterface $aggregateRoot)
     {
         foreach ($this->_aggregateRoots as $index => $current) {
             if ($current->getId() == $aggregateRoot->getId()) {
@@ -47,17 +78,23 @@ class MemoryRepository implements Repository
                 break;
             }
         }
+        return $this;
     }
 
+    /**
+     * @param array $aggregateRoots
+     * @return RepositoryInterface
+     */
     public function removeAll(array $aggregateRoots = NULL)
     {
         if ($aggregateRoots == NULL) {
             unset($this->_aggregateRoots);
             $this->_aggregateRoots = array();
-            return;
+            return $this;
         }
         foreach ($aggregateRoots as $aggregateRoot) {
             $this->remove($aggregateRoot);
         }
+        return $this;
     }
 }
