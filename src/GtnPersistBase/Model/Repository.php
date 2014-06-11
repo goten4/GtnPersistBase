@@ -5,6 +5,7 @@ interface Repository
 {
     /**
      * @param AggregateRoot $aggregateRoot
+     * @return Repository
      */
     public function add(AggregateRoot $aggregateRoot);
 
@@ -26,16 +27,19 @@ interface Repository
 
     /**
      * @param AggregateRoot $aggregateRoot
+     * @return Repository
      */
     public function update(AggregateRoot $aggregateRoot);
 
     /**
      * @param AggregateRoot $aggregateRoot
+     * @return Repository
      */
     public function remove(AggregateRoot $aggregateRoot);
 
     /**
      * @param array $aggregateRoots
+     * @return Repository
      */
     public function removeAll(array $aggregateRoots = null);
 }
