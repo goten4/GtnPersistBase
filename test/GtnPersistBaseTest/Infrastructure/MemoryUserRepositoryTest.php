@@ -1,19 +1,19 @@
 <?php
-namespace GtnPersistBaseTest\Infrastructure\Memory;
+namespace GtnPersistBaseTest\Infrastructure;
 
-use GtnPersistBase\Infrastructure\Memory;
+use GtnPersistBase\Infrastructure\MemoryRepository;
 use GtnPersistBaseTest\Model\User;
 
-class UserRepositoryTest extends \PHPUnit_Framework_TestCase
+class MemoryUserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Memory\Repository
+     * @var MemoryRepository
      */
     protected $repository;
 
     protected function setUp()
     {
-        $this->repository = new Memory\Repository();
+        $this->repository = new MemoryRepository();
         $this->populate();
     }
 

@@ -1,10 +1,10 @@
 <?php
-namespace GtnPersistBase\Infrastructure\Memory;
+namespace GtnPersistBase\Infrastructure;
 
 use GtnPersistBase\Model\AggregateRootInterface;
 use GtnPersistBase\Model\RepositoryInterface;
 
-class Repository implements RepositoryInterface
+class MemoryRepository implements RepositoryInterface
 {
     /**
      * @var int
