@@ -22,7 +22,7 @@ Provided Classes and Interfaces
 
 * `GtnPersistBase\Model\AggregateRoot` - Interface defining an aggregate root (getId() method).
 * `GtnPersistBase\Model\Repository` - Interface defining the minimum set of methods a repository must implements.
-* `GtnPersistBase\Infrastructure\MemoryRepository` - In memory Repository implementation (useful in unit tests context).
+* `GtnPersistBase\Infrastructure\Memory\Repository` - In memory Repository implementation (useful in unit tests context).
 
 ## See also
 
