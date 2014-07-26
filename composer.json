@@ -28,8 +28,10 @@
     },
     "autoload": {
         "psr-0": {
-            "GtnPersistBase": "src/",
-            "GtnPersistBaseTest": "tests/"
-        }
+            "GtnPersistBase": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }
