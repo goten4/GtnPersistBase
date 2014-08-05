@@ -93,4 +93,48 @@ class Repository implements RepositoryInterface
         }
         return $this;
     }
+
+    /**
+     * Set AggregateRoots.
+     *
+     * @param \GtnPersistBase\Model\AggregateRootInterface[] $aggregateRoots
+     * @return Repository
+     */
+    public function setAggregateRoots($aggregateRoots)
+    {
+        $this->aggregateRoots = $aggregateRoots;
+        return $this;
+    }
+
+    /**
+     * Get AggregateRoots.
+     *
+     * @return \GtnPersistBase\Model\AggregateRootInterface[]
+     */
+    public function getAggregateRoots()
+    {
+        return $this->aggregateRoots;
+    }
+
+    /**
+     * Set Counter.
+     *
+     * @param int $counter
+     * @return Repository
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+        return $this;
+    }
+
+    /**
+     * Get Counter.
+     *
+     * @return int
+     */
+    public function getCounter()
+    {
+        return $this->counter;
+    }
 }
