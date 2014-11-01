@@ -20,8 +20,9 @@ Simply clone this project into your `./vendor/` directory and enable it in your
 Provided Classes and Interfaces
 -------------------------------
 
-* `GtnPersistBase\Model\AggregateRoot` - Interface defining an aggregate root (getId() method).
-* `GtnPersistBase\Model\Repository` - Interface defining the minimum set of methods a repository must implements.
+* `GtnPersistBase\Model\EntityInterface` - Interface defining an entity.
+* `GtnPersistBase\Model\AggregateRootInterface` - Interface defining an aggregate root.
+* `GtnPersistBase\Model\RepositoryInterface` - Interface defining the minimum set of methods a repository must implements.
 * `GtnPersistBase\Infrastructure\Memory\Repository` - In memory Repository implementation (useful in unit tests context).
 
 ## See also

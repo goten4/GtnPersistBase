@@ -1,16 +1,6 @@
 <?php
 namespace GtnPersistBase\Model;
 
-interface AggregateRootInterface
+interface AggregateRootInterface extends EntityInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
-    /**
-     * @param $id
-     * @return AggregateRootInterface
-     */
-    public function setId($id);
 }
