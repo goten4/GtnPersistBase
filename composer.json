@@ -19,8 +19,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-loader": "2.3.*",
-        "zendframework/zend-modulemanager": "2.3.*"
+        "zendframework/zend-loader": "~2.3",
+        "zendframework/zend-modulemanager": "~2.3"
     },
     "require-dev": {
         "phpunit/PHPUnit": "3.7.*",
